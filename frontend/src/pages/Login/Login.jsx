@@ -29,7 +29,7 @@ const Login = () => {
         }
       });
       if(response.status === 200){
-        document.cookie = `token=${response.data.token}`;
+        document.cookie = `token=${response.data.message.token}`;
         navigate('/');
       }
     }
