@@ -13,15 +13,15 @@ const Navbar = () => {
 
   return (
     <>
-        <header className='flex items-center justify-between bg-[#f3f4f5] border-b-2 pb-2 border-[#C0C0C0] m-2 mx-4'>
+        <header className='flex items-center justify-between border-b-2 pb-2 border-[#C0C0C0] m-2 mx-4'>
              <span className='text-5xl'>J<span className='text-4xl absolute'>F</span></span>
              <div className='flex flex-row gap-x-2 justify-center items-center'>
                 <div className='block relative'>
                     <div className={`
                     md:flex flex-col md:flex-row absolute w-[300px] sm:w-auto md:static gap-x-12 text-xl
-                    top-8  ${(isMenuOpen)?'-left-[250px]':'hidden'} px-5 md:p-0 shadow-lg md:shadow-none md:overflow-hidden bg-[#f3f3f3]
+                    top-8  ${(isMenuOpen)?'-left-[250px]':'hidden'} px-5 md:p-0 shadow-lg md:shadow-none md:overflow-hidden 
                     `}>
-                        <Link to='/home' className='bg-[#f3f3f3]'>
+                        <Link to='/home' className='nav-items'>
                             <div className='p-4 md:p-0 shadow-sm md:shadow-none'>Home</div>
                         </Link>
                         <Link to='/journals' className='nav-items'>
@@ -45,7 +45,7 @@ const Navbar = () => {
              </div>
              <div className='hidden md:block'>
                 <Link to='/profile'>
-                    <div className='py-3 px-4 bg-primary text-[#f3f3f3] rounded-lg roboto-regular'>Profile</div>
+                    <div className='py-3 px-4 bg-primary hover:bg-opacity-80 text-[#f3f3f3] rounded-lg roboto-regular'>Profile</div>
                 </Link>
              </div>
         </header> 
