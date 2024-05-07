@@ -1,0 +1,16 @@
+@tailwind utilities;
+
+@layer utilities{
+    .form-container{
+        @apply h-screen w-full flex justify-center items-center
+    }
+    .form {
+        @apply flex flex-col gap-[10px] p-[30px] w-[400px] rounded-[20px] border-solid border-[#C0C0C0] border-2 shadow-md
+    }
+    .title {
+        @apply text-center text-2xl font-medium
+    }
+    .button {
+        @apply bg-[#161616] text-white text-xl h-[50px] w-full rounded-md my-2 py-2 items-center justify-center
+    }
+}
