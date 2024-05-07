@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities{
+    .ul-container{
+        @apply lg:flex flex-col lg:flex-row absolute w-[300px] sm:w-auto lg:static gap-x-12 text-xl top-8  px-5 lg:p-0 shadow-lg lg:shadow-none lg: overflow-hidden bg-[#f3f4f5] sm:bg-[#f3f3f3]
+    }
+    .nav-items{
+        @apply border-b-2 border-[#f3f3f3] hover:border-[#470ff4] ease-in-out duration-500 bg-[#f3f3f3]
+    }
+}

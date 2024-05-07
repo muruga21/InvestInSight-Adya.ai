@@ -11,6 +11,6 @@
         @apply text-center text-2xl font-medium
     }
     .button {
-        @apply bg-[#161616] text-white text-xl h-[50px] w-full rounded-md my-2 py-2 items-center justify-center
+        @apply bg-[#161616] text-[#f3f3f3] text-xl h-[50px] w-full rounded-md my-2 py-2 items-center justify-center
     }
 }
