@@ -3,7 +3,6 @@ const { generateToken } = require('../utils/Token');
 const { userModel } = require('../models/userSchema');
 
 const login = async (req, res) => {
-    console.log("check")
     try{
         const username = req.body.username;
         const password = req.body.password;
@@ -37,9 +36,8 @@ const login = async (req, res) => {
 
 const signup = async(req, res) =>{
     const username = req.body.username;
-    const email = req.body.email;
     const password = req.body.password;
-    if(!username || !password || !email){
+    if(!username || !password ){
         return res.status(401).json({error: true, message:"invalid credentials"})
     }
     try{
@@ -51,9 +49,14 @@ const signup = async(req, res) =>{
         const hashPassword = await bcrypt.hash(password, 10);
 
         try{
-            const doc = await userModel.create({username: username, password: hashPassword, email: email})
+            const doc = await userModel.create({username: username, password: hashPassword})
             if(doc){
-                return res.status(200).json({error:false, message:"user created successfully"});
+                const authToken = await generateToken(username,"user");
+                if(authToken === ""){
+                return res.status(400).json({error:true, message:"auth token not generated"});
+                }
+                // res.cookie("token", authToken);
+                return res.status(200).json({error:false,message:{token:authToken,userType: "user"}})
             }
         }
         catch(err){

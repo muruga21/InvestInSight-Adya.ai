@@ -9,7 +9,7 @@ const cookieParser = require('cookie-parser');
 
 const userRoutes = require('./routes/userRoutes');
 
-const corsOptions = {origin: 'http://localhost:5173/'}
+const corsOptions = {origin: process.env.FRONTEND_URL, credentials: true}
 
 const app = express();
 app.use(express.json());
