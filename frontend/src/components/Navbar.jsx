@@ -13,7 +13,7 @@ const Navbar = () => {
 
   return (
     <>
-        <header className='flex items-center justify-between border-b-2 pb-2 border-[#C0C0C0] m-2 mx-4'>
+        <header className='flex items-center justify-between border-b pb-2 border-[#C0C0C0] m-2 mx-4'>
              <span className='text-5xl'>J<span className='text-4xl absolute'>F</span></span>
              <div className='flex flex-row gap-x-2 justify-center items-center'>
                 <div className='block relative'>
