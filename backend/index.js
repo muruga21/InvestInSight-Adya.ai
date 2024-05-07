@@ -8,6 +8,7 @@ const bcrypt = require('bcrypt');
 const cookieParser = require('cookie-parser');
 
 const userRoutes = require('./routes/userRoutes');
+const stockRoutes = require('./routes/stockRoutes');
 
 const corsOptions = {origin: process.env.FRONTEND_URL, credentials: true}
 
@@ -38,3 +39,4 @@ app.get('/',(req, res)=>{
 })
 
 app.use('/user',userRoutes)
+app.use('/stock', stockRoutes)
