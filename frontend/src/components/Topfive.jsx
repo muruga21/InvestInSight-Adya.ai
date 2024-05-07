@@ -68,6 +68,11 @@ const Topfive = () => {
                 </div>
             </div>
         </div>
+        <div className='flex flex-row-reverse'>
+            <button className='bg-primary py-3 px-4 rounded-lg text-[#f3f3f3] roboto-regular text-xl hover:bg-opacity-80'>
+                View More
+            </button>
+        </div>
     </div>
   )
 }
