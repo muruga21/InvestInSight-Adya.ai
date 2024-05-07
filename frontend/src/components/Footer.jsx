@@ -22,7 +22,6 @@ const Footer = () => {
                 <span className='text-[13px]'>@2024 Developed By Muruga Perumal R</span>
              </div>
           </div>
-
         </footer>
     </>
   )

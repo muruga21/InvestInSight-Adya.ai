@@ -29,7 +29,7 @@ const Topfive = () => {
 
 
   return (
-    <div className='mx-8 flex flex-col gap-10 py-10'>
+    <div className='sm:mx-8 mx-4 flex flex-col gap-10 py-10'>
         <div className='text-4xl roboto-bold'>
             Top 5 Stocks avaliable
         </div>

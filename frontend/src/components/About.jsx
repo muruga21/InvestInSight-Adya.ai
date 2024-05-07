@@ -3,7 +3,7 @@ import about from '../assets/about.svg'
 
 const About = () => {
   return (
-    <div className='m-8'>
+    <div className='sm:m-8 m-4'>
       <div className='flex'>
         <div className='w-[50%] hidden justify-center items-center sm:flex '>
           <img src={about} alt='about' className='h-[500px]'/>

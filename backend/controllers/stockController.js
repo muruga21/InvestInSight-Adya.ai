@@ -36,4 +36,17 @@ const getTopStocks = async(req, res) =>{
     }
 }
 
-module.exports = { addStock, getTopStocks }
+const getStocks = async(req, res) =>{
+    try{
+        const stocks = await stockModel.find({});
+        if(stocks){
+            return res.status(200).json({error:false, message: stocks})
+        }
+    }
+    catch(err){
+        console.log(err.message)
+        return res.status(500).json({error:true, message: err.message})
+    }
+}
+
+module.exports = { addStock, getTopStocks, getStocks }

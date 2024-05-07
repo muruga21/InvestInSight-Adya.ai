@@ -2,11 +2,12 @@ import React from 'react'
 import home from '../../assets/home.jpg'
 import Topfive from '../../components/Topfive'
 import About from '../../components/About'
+import { Link } from 'react-router-dom'
 
 const Home = () => {
   return (
     <>
-        <div className='flex mx-8 items-center'>
+        <div className='flex sm:mx-8 mx-4 items-center'>
             <div className='md:w-[50%] h-[85vh] flex justify-center flex-col gap-10'>
                 <div className='text-6xl roboto-medium'>
                     The next-gen <span className='text-primary'>Invest </span>
@@ -16,9 +17,9 @@ const Home = () => {
                     Easily invest in stocks and crypto in one platform - All stocks in one place
                 </div>
                 <div>
-                    <button className='bg-primary py-3 px-4 rounded-lg text-[#f3f3f3] roboto-regular text-xl hover:bg-opacity-80'>
+                    <Link className='bg-primary py-3 px-4 rounded-lg text-[#f3f3f3] roboto-regular text-xl hover:bg-opacity-80' to={'/stocks'}>
                         Get Started
-                    </button>
+                    </Link>
                 </div>
             </div>
             <div className='hidden md:block w-[50%]'>
