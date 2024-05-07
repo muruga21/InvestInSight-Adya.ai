@@ -1,24 +1,25 @@
 const bcrypt = require('bcrypt');
 const { generateToken } = require('../utils/Token');
+const { userModel } = require('../models/userSchema');
 
 const login = async (req, res) => {
     console.log("check")
     try{
-        const userName = req.body.userName;
+        const username = req.body.username;
         const password = req.body.password;
 
-        if(!userName || !password){
+        if(!username || !password){
             return res.status(500).json({error:true,message:"invalid credentials"})
         }
-        
-        const user = await userModel.findOne({userName:userName})
+
+        const user = await userModel.findOne({username:username})
         if(!user){
             return  res.status(500).json({error:true,message:"User Not Found"})
         }
         
-        const passwordMatch =  await bcrypt.compare(passWord,user.password);
+        const passwordMatch =  await bcrypt.compare(password,user.password);
         if(passwordMatch){
-            const authToken = await generateToken(userName,"user");
+            const authToken = await generateToken(username,"user");
             if(authToken === ""){
             return res.status(400).json({error:true, message:"auth token not generated"});
             }
@@ -34,5 +35,37 @@ const login = async (req, res) => {
     }
 }
 
+const signup = async(req, res) =>{
+    const username = req.body.username;
+    const email = req.body.email;
+    const password = req.body.password;
+    if(!username || !password || !email){
+        return res.status(401).json({error: true, message:"invalid credentials"})
+    }
+    try{
+        const response = await userModel.findOne({username:username});
+        if(response){
+            return res.status(401).json({error: true, message:"User Name already exists"});
+        }
 
-module.exports = {login}
+        const hashPassword = await bcrypt.hash(password, 10);
+
+        try{
+            const doc = await userModel.create({username: username, password: hashPassword, email: email})
+            if(doc){
+                return res.status(200).json({error:false, message:"user created successfully"});
+            }
+        }
+        catch(err){
+            console.log(err.message)
+            return res.status(500).json({error:true, message: err.message})
+        }
+    }
+    catch(err){
+        console.log(err.message)
+        return res.status(520).json({error:true, message: err.message})
+    }
+}
+
+
+module.exports = {login, signup}
