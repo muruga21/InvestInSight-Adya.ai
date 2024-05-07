@@ -3,6 +3,7 @@ import React, {useState} from 'react'
 import CloseIcon from '@mui/icons-material/Close';
 import {Link,useNavigate} from 'react-router-dom'
 import DehazeIcon from '@mui/icons-material/Dehaze';
+import { SiWebmoney } from "react-icons/si";
 import './components.css'
 
 
@@ -13,8 +14,11 @@ const Navbar = () => {
 
   return (
     <>
-        <header className='flex items-center justify-between border-b pb-2 border-[#C0C0C0] m-2 mx-4'>
-             <span className='text-5xl'>J<span className='text-4xl absolute'>F</span></span>
+        <header className='flex items-center justify-between border-b roboto-regular pb-2 border-[#C0C0C0] m-2 mx-4'>
+            <div className='flex items-center gap-x-[0.6rem]'>
+               <SiWebmoney className='text-2xl'/>
+               <span className='text-2xl'>InvestInsight</span>
+            </div>
              <div className='flex flex-row gap-x-2 justify-center items-center'>
                 <div className='block relative'>
                     <div className={`
@@ -45,7 +49,7 @@ const Navbar = () => {
              </div>
              <div className='hidden md:block'>
                 <Link to='/profile'>
-                    <div className='py-3 px-4 bg-primary hover:bg-opacity-80 text-[#f3f3f3] rounded-lg roboto-regular'>Profile</div>
+                    <div className='py-3 px-4 bg-primary hover:bg-opacity-80 text-[#f3f3f3] rounded-lg roboto-medium'>Profile</div>
                 </Link>
              </div>
         </header> 
