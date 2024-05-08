@@ -2,7 +2,10 @@ import React, { useEffect, useState } from 'react'
 import TextField from '@mui/material/TextField';
 import axios from 'axios';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import CloseIcon from '@mui/icons-material/Close';
 import './BrowseStocks.css'
+import StockPopup from '../../components/StockPopup';
+import {MdSearch} from 'react-icons/md'
 
 const BrowseStocks = () => {
     const [stocks, setStocks] = useState([]);
@@ -10,6 +13,7 @@ const BrowseStocks = () => {
     const [search, setSearch] = useState('');
     const [isPopupOpen, setIsPopupOpen] = useState(false);
     const [stockId, setStockId] = useState('');
+    const [stockDetails, setStockDetails] = useState({});
 
     const fetchStocks = async () => {
         try{
@@ -30,6 +34,13 @@ const BrowseStocks = () => {
         }
     }
 
+    const handleView = (stock) => {
+        console.log(stock)
+        setIsPopupOpen(true);
+        setStockId(stockId);
+        setStockDetails(stock);
+    }
+
     useEffect(()=>{
         fetchStocks();
     },[])
@@ -44,19 +55,15 @@ const BrowseStocks = () => {
     ,[search, stocks])
 
   return (
-    <div className='sm:m-8 m-4 flex flex-col items-center'>
+    <div className='sm:m-8 m-4 flex flex-col items-center min-h-[80vh]'>
         <div className='flex flex-col gap-5'>
             <div className='text-4xl text-center roboto-regular'>Find the most suitable stock for you to buy now</div>
-            <div className='flex justify-center gap-5'>
-                <TextField 
-                    id="outlined-search" 
-                    label="Search field" 
-                    type="search" 
-                    style={{ width: '300px' }} 
-                    value={search}
-                    onChange={(e)=>setSearch(e.target.value)}
-                />
-                <button className='bg-primary py-3 px-4 rounded-lg text-[#f3f3f3] roboto-regular text-xl hover:bg-opacity-80'>search</button>
+            <div className='flex justify-center'>
+                <div className='flex justify-between items-center border rounded-lg border-[#c0c0c0] w-[350px]'>
+                    <input className='w-full outline-none p-2 m-1 text-xl' placeholder='Search Stock Here' onChange={(e)=>setSearch(e.target.value)}/>
+                    <MdSearch style={{'height':40, 'width': 40}} className='text-[#333333dc]'/>
+                    {/* <button className='bg-primary py-3 px-4 rounded-lg text-[#f3f3f3] roboto-regular text-xl hover:bg-opacity-80'>search</button> */}
+                </div>
             </div>
         </div>
         <div className='stock-container'>
@@ -83,7 +90,10 @@ const BrowseStocks = () => {
                             <div className="text-center py-4">{stock.stockPrice}</div>
                             <div className="text-center py-4">{stock.hikeRate}</div>
                             <div>
-                                <button className='buy-button roboto-regular'>
+                                <button 
+                                    className='buy-button roboto-regular'
+                                    onClick={()=>{handleView(stock)}}
+                                >
                                     <div>View</div>
                                     <div><ArrowForwardIosIcon/></div>
                                 </button>
@@ -93,6 +103,20 @@ const BrowseStocks = () => {
                 })
             }
         </div>
+        {
+            (isPopupOpen) 
+                && 
+            <div className='h-[90vh] w-full fixed flex justify-center items-center top-10'>
+                <div className='popUp-container'>
+                    <div className='flex flex-row-reverse'>
+                        <button onClick={()=>{setIsPopupOpen(false)}}>
+                            <CloseIcon style={{'height':40, 'width': 40}}/>
+                        </button>
+                    </div>
+                    <StockPopup stockDetails={stockDetails}/>
+                </div>
+            </div>
+        }
     </div>
   )
 }

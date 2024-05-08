@@ -11,7 +11,7 @@ const Footer = () => {
                <SiWebmoney className='text-2xl'/>
                <span className='text-2xl'>InvestInsight</span>
             </div>
-            <div className='flex text-[18px] gap-x-[3rem]'>
+            <div className='flex text-[18px] gap-x-[3rem] flex-col sm:flex-row'>
                <Link to='/' className='nav-items'>Home</Link>
                <Link to='/' className='nav-items'>About</Link>
                <Link to='/' className='nav-items'>Contact us</Link>
