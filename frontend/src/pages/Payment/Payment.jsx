@@ -1,11 +1,42 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { useSelector } from 'react-redux';
 import payment from '../../assets/payment.svg'
+import axios from 'axios';
+import {useNavigate} from 'react-router-dom';
 
 const Payment = () => {
 
     const { stockName, stockCount, stockPrice, stockId, stockImg} = useSelector((state) => state.stockSlice);
     console.log({ stockName, stockCount, stockPrice, stockId, stockImg})
+    const navigate = useNavigate();
+
+    const handlePurchase = async () => {
+        try{
+            const token = document.cookie.split('=')[1]
+            const response = await axios.post(process.env.REACT_APP_BACKEND_URL+'/stock/buyStock',
+            {
+                stockId,
+                stockName,
+                stockQuantity: stockCount,
+                imgUrl: stockImg
+            },
+            {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer '+token,
+                }
+            })
+            if(response.data.error){
+                console.log(response.data.message)
+            }
+            else{
+                navigate('/')
+            }
+        }
+        catch(err){
+            console.log(err.message)
+        }
+    }
 
   return (
     <div className='flex sm:mx-4 m-2 min-h-[80vh] roboto-regular'>
@@ -55,7 +86,7 @@ const Payment = () => {
                     </div>
                 </div>
             </div>
-            <button className='py-3 w-full px-4 bg-primary hover:bg-opacity-80 text-xl text-[#f3f3f3] rounded-lg roboto-medium'>Purchase</button>
+            <button className='py-3 w-full px-4 bg-primary hover:bg-opacity-80 text-xl text-[#f3f3f3] rounded-lg roboto-medium' onClick={()=>{handlePurchase()}}>Purchase</button>
         </div>
     </div>
   )

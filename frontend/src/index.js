@@ -10,6 +10,7 @@ import BrowseStocks from './pages/Stocks/BrowseStocks.jsx';
 import store from './redux/store.js'
 import { Provider } from 'react-redux'
 import Payment from './pages/Payment/Payment.jsx';
+import Profile from './pages/Profile/Profile.jsx';
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
       {
         path:"/payment",
         element:<Payment/>
+      },
+      {
+        path:'/profile',
+        element:<Profile/>
       }
     ]
   },

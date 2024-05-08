@@ -1,8 +1,8 @@
 const {stockModel} = require('../models/stockSchema');
+const {stockBoughtModel} = require('../models/stockBoughtSchema');
 
 const addStock = async (req, res) => {
     const { stockName, stockPrice, stockId, imgUrl, lastWeekData, hikeRate } = req.body;
-    console.log(req.body)
 
     if (!stockName || !stockPrice || !stockId || !imgUrl || !lastWeekData || !hikeRate) {
         return res.status(400).json({ error:false, message: 'Please enter all fields' });
@@ -49,4 +49,31 @@ const getStocks = async(req, res) =>{
     }
 }
 
-module.exports = { addStock, getTopStocks, getStocks }
+const buyStock = async(req, res) => {
+    const { stockId, stockName, stockQuantity, imgUrl } = req.body;
+    const userName = req.user;
+
+    console.log(stockId, stockName, stockQuantity, imgUrl, userName);
+
+    if (!stockId || !stockName || !stockQuantity || !userName || !imgUrl) {
+        return res.status(400).json({ error:false, message: 'Please enter all fields' });
+    }
+    try{
+        const isStock = await stockModel.findOne({ stockId: stockId });
+        if (!isStock) {
+            return res.status(400).json({ error:false, message: 'Stock does not exists' });
+        }
+        const doc = await stockBoughtModel.create({ stockId, stockName, stockQuantity, userName, imgUrl });
+        if (doc) {
+            return res.status(200).json({ error: false, message: 'Stock bought successfully' });
+        }
+    }
+    catch(err){
+        console.log(err.message)
+        return res.status(500).json({error:true, message: err.message})
+    }
+}
+
+const getStocks
+
+module.exports = { addStock, getTopStocks, getStocks, buyStock }
