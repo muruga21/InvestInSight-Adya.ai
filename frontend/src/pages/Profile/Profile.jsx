@@ -6,6 +6,32 @@ const Profile = () => {
     const [stocks, setStocks] = useState([]);
     const [isSell, setIsSell] = useState(false);
     const [stockId, setStockId] = useState('');
+    const [userName, setUserName] = useState('');
+
+  const getUser = async() => {
+    try{
+      const token = document.cookie.split('=')[1];
+      const response = await axios.get(process.env.REACT_APP_BACKEND_URL+'/user/getUser', {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer '+token,
+        }
+      });
+      if(response.data.error){
+        console.log(response.data.message)
+      }
+      else{
+        setUserName(response.data.message.username)
+      }
+    }
+    catch(err){
+      console.log(err.message)
+    }
+  }
+
+  useEffect(()=>{
+    getUser();
+  },[])
     
     const fetchStocks = async () => {
         try{
@@ -63,7 +89,7 @@ const Profile = () => {
     },[])
 
   return (
-    <div className='m-4 flex items-center flex-col'>
+    <div className='m-4 flex items-center flex-col min-h-[80vh]'>
         <div className='md:w-[80%] w-full border border-[#c0c0c0] p-8 rounded-lg bg-[#eafcfc]'>
             <div className='flex items-center gap-10'>
                 <img 
@@ -72,7 +98,7 @@ const Profile = () => {
                     className='sm:w-[150px] w-[100px] rounded-full'
                 />
                 <div className='sm:text-6xl text-3xl roboto-regular'>
-                    Name
+                    {userName}
                 </div>
             </div>
         </div>

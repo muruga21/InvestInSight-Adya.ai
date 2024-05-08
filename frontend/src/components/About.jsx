@@ -14,6 +14,11 @@ const About = () => {
             <p>we understand the importance of smart investment decisions in achieving your financial goals. Whether you're a seasoned investor or just starting out, our platform provides the tools and resources you need to make informed investment choices and build a secure financial future</p><br/>
             <p>Ready to take control of your financial future? Sign up for a free account today and start investing with confidence. With InvestInSight, you're one step closer to achieving your financial goals.</p>
           </div>
+          <div>
+            <button className='bg-primary py-3 px-4 rounded-lg text-[#f3f3f3] roboto-regular text-xl hover:bg-opacity-80'>
+                View More
+            </button>
+          </div>
         </div>
       </div>
     </div>

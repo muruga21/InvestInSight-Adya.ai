@@ -13,8 +13,8 @@ const Footer = () => {
             </div>
             <div className='flex text-[18px] gap-x-[3rem] flex-col sm:flex-row'>
                <Link to='/' className='nav-items'>Home</Link>
-               <Link to='/' className='nav-items'>About</Link>
-               <Link to='/' className='nav-items'>Contact us</Link>
+               <Link to='/stocks' className='nav-items'>stocks</Link>
+               <Link to='/profile' className='nav-items'>profile</Link>
             </div>
           </div>
           <div className='flex justify-between pt-[1rem]'>

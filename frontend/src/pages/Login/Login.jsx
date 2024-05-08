@@ -63,15 +63,16 @@ const Login = () => {
             id="outlined-basic" 
             variant="outlined"  
             onChange={(e)=>{setPassword(e.target.value)}}
+            type='password'
           />
           <div className='text-[#FF0000]'>{errorMessage}</div>
-        <button className="button" onClick={(e)=>{handleSubmit(e)}} >
+        <button className="button bg-primary" onClick={(e)=>{handleSubmit(e)}} >
           {
             (!displayLoading)?'Login':<CircularProgress style={{ height: 30, width: 30}}/>
           }
         </button>
         <Link className="text-center" to={'/signup'}>
-          Don`t have an account? <span className=" text-sm text-[#2d79f3] cursor-pointer">
+          Don`t have an account? <span className=" text-sm text-white cursor-pointer">
           Sign Up</span>
         </Link>
       </form>

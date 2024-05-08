@@ -7,7 +7,7 @@ import { SiWebmoney } from "react-icons/si";
 import './components.css'
 
 
-const Navbar = () => {
+const Navbar = (props) => {
   const navigate = useNavigate()
 
    const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -25,14 +25,14 @@ const Navbar = () => {
                     md:flex flex-col md:flex-row absolute w-[300px] sm:w-auto md:static gap-x-12 text-xl
                     top-8  ${(isMenuOpen)?'-left-[250px]':'hidden'} px-5 md:p-0 shadow-lg md:shadow-none md:overflow-hidden 
                     `}>
-                        <Link to='/home' className='nav-items'>
+                        <Link to='/' className='nav-items'>
                             <div className='p-4 md:p-0 shadow-sm md:shadow-none'>Home</div>
                         </Link>
-                        <Link to='/journals' className='nav-items'>
-                            <div className='p-4 md:p-0 shadow-sm md:shadow-none'>Journals</div>
+                        <Link to='/stocks' className='nav-items'>
+                            <div className='p-4 md:p-0 shadow-sm md:shadow-none'>Stocks</div>
                         </Link>
-                        <Link to='/contactus' className='nav-items'>
-                            <div className='p-4 md:p-0 shadow-sm md:shadow-none'>Contact us</div>
+                        <Link to='/profile' className='nav-items'>
+                            <div className='p-4 md:p-0 shadow-sm md:shadow-none'>profile</div>
                         </Link> 
                     </div>
                 </div>
@@ -48,8 +48,9 @@ const Navbar = () => {
                 </button>
              </div>
              <div className='hidden md:block'>
-                <Link to='/profile'>
-                    <div className='py-3 px-4 bg-primary hover:bg-opacity-80 text-[#f3f3f3] rounded-lg roboto-medium'>Profile</div>
+                <Link to='/profile' className='flex gap-5 pr-4 justify-center items-center'>
+                    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2a4inioS7A9kKogLPOsEYLwekKcphbnzfcfC7BeKTAA&s' alt='profile' className='h-[40px]'/>
+                    <div className='text-2xl roboto-regular'>{props.userName}</div>
                 </Link>
              </div>
         </header> 

@@ -1,12 +1,15 @@
-import { Outlet } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 import './App.css';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import useDispatch from 'react-redux';
 
 function App() {
+
+  const navigate = useNavigate();
+  const [userName, setUserName] = useState('');
 
   const getUser = async() => {
     try{
@@ -21,7 +24,7 @@ function App() {
         console.log(response.data.message)
       }
       else{
-        console.log(response.data.message)
+        setUserName(response.data.message.username)
       }
     }
     catch(err){
@@ -30,12 +33,16 @@ function App() {
   }
 
   useEffect(()=>{
+    const token = document.cookie.split('=')[1];
+    if(!token){
+      navigate('/login');
+    }
     getUser();
   },[])
 
   return (
     <>
-      <Navbar/>
+      <Navbar userName = {userName}/>
       <Outlet/>
       <Footer/>
     </>
