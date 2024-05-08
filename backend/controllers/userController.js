@@ -70,5 +70,20 @@ const signup = async(req, res) =>{
     }
 }
 
+const getUser = async(req, res) =>{
+    const userName = req.user;
+    try{
+        const user = await userModel.findOne({username: userName});
+        if(user){
+            return res.status(200).json({error:false, message:user})
+        }
+        else{
+            return res.status(404).json({error:true, message:"User not found"})
+        }
+    }
+    catch(e){
+        return res.status(500).json({error:true, message:e.message})
+    }
+}
 
-module.exports = {login, signup}
+module.exports = {login, signup, getUser}
