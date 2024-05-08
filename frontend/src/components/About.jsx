@@ -1,5 +1,6 @@
 import React from 'react'
 import about from '../assets/about.svg'
+import { Link } from 'react-router-dom'
 
 const About = () => {
   return (
@@ -15,9 +16,9 @@ const About = () => {
             <p>Ready to take control of your financial future? Sign up for a free account today and start investing with confidence. With InvestInSight, you're one step closer to achieving your financial goals.</p>
           </div>
           <div>
-            <button className='bg-primary py-3 px-4 rounded-lg text-[#f3f3f3] roboto-regular text-xl hover:bg-opacity-80'>
+            <Link className='bg-primary py-3 px-4 rounded-lg text-[#f3f3f3] roboto-regular text-xl hover:bg-opacity-80' to={'/stocks'}>
                 View More
-            </button>
+            </Link>
           </div>
         </div>
       </div>

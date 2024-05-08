@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
+import { Link } from 'react-router-dom';
 
 const Topfive = () => {
 
@@ -54,9 +55,9 @@ const Topfive = () => {
             }
         </div>
         <div className='flex flex-row-reverse'>
-            <button className='bg-primary py-3 px-4 rounded-lg text-[#f3f3f3] roboto-regular text-xl hover:bg-opacity-80'>
+            <Link className='bg-primary py-3 px-4 rounded-lg text-[#f3f3f3] roboto-regular text-xl hover:bg-opacity-80' to={'/stocks'}>
                 View More
-            </button>
+            </Link>
         </div>
     </div>
   )
