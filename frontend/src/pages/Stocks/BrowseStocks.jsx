@@ -105,7 +105,7 @@ const BrowseStocks = () => {
         {
             (isPopupOpen) 
                 && 
-            <div className='h-[90vh] w-full fixed flex justify-center items-center top-10'>
+            <div className='fixed top-0 left-0 w-full h-full bg-[#000000] bg-opacity-60 flex items-center justify-center'>
                 <div className='popUp-container'>
                     <div className='flex flex-row-reverse'>
                         <button onClick={()=>{setIsPopupOpen(false)}}>

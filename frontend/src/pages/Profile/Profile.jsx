@@ -1,14 +1,16 @@
-import React ,{useState} from 'react'
+import React ,{useEffect, useState} from 'react'
 import axios from 'axios';
 
 const Profile = () => {
 
     const [stocks, setStocks] = useState([]);
+    const [isSell, setIsSell] = useState(false);
+    const [stockId, setStockId] = useState('');
     
     const fetchStocks = async () => {
         try{
             const token = document.cookie.split('=')[1];
-            const response = await axios.get(process.env.REACT_APP_BACKEND_URL+'/stock/getStocks', {
+            const response = await axios.get(process.env.REACT_APP_BACKEND_URL+'/stock/getUserStocks', {
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': 'Bearer '+token,
@@ -26,6 +28,40 @@ const Profile = () => {
         }
     }
 
+    const sellStock = async () => {
+        try{
+            const token = document.cookie.split('=')[1];
+            const response = await axios.post(process.env.REACT_APP_BACKEND_URL+'/stock/sellStocks', {
+                stockId: stockId
+            }, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer '+token,
+                }
+            });
+            if(response.data.error){
+                console.log(response.data.message)
+            }
+            else{
+                fetchStocks();
+                setIsSell(false);
+            }
+        }
+        catch(err){
+            console.log(err.message)
+        }
+    }
+
+
+    const handleSell = (stockId) => {
+        setIsSell(true);
+        setStockId(stockId)
+    }
+
+    useEffect(()=>{
+        fetchStocks();
+    },[])
+
   return (
     <div className='m-4 flex items-center flex-col'>
         <div className='md:w-[80%] w-full border border-[#c0c0c0] p-8 rounded-lg bg-[#eafcfc]'>
@@ -41,17 +77,16 @@ const Profile = () => {
             </div>
         </div>
         <div className='md:w-[80%] w-full'>
-            <div className="stock-row">
+            <div className="grid grid-cols-5 gap-2 border-b border-[#c0c0c0] w-full text-xl items-center">
                 <div></div>
                 <div className="text-center py-4">Stock Name</div>
                 <div className="text-center py-4 hidden sm:block">Stock Id</div>
-                <div className="text-center py-4">Stock Price</div>
-                <div className="text-center py-4">Hike Rate</div>
+                <div className="text-center py-4">Stock Quantity</div>
             </div>
             {
                 stocks.map((stock, index)=>{
                     return(
-                        <div className="stock-row">
+                        <div className="grid grid-cols-5 gap-2 border-b border-[#c0c0c0] w-full text-xl items-center">
                             <div className='flex items-center justify-center'>
                                 <img 
                                     src={stock.imgUrl} 
@@ -61,16 +96,38 @@ const Profile = () => {
                             </div>
                             <div className="text-center py-4">{stock.stockName}</div>
                             <div className="text-center py-4 hidden sm:block">{stock.stockId}</div>
-                            <div className="text-center py-4">{stock.stockPrice}</div>
-                            <div className="text-center py-4">{stock.hikeRate}</div>
+                            <div className="text-center py-4">{stock.stockQuantity}</div>
                             <div>
                                 <button 
-                                    className='buy-button roboto-regular'
-                                    onClick={()=>{}}
+                                    className=' bg-[#FF0000] py-2 px-4 rounded-lg text-[#f3f3f3] hover:bg-opacity-80 flex gap-3 items-center roboto-regular'
+                                    onClick={()=>{handleSell(stock.stockId)}}
                                 >
                                     <div>Sell</div>
                                 </button>
                             </div>
+                            { (isSell) && <div>
+                                <div>
+                                    <div className='fixed top-0 left-0 w-full h-full  ease-in-out duration-500 bg-[#000000] bg-opacity-50 flex items-center justify-center'>
+                                        <div className='bg-[#eafcfc] p-8 rounded-lg'>
+                                            <div className='text-2xl roboto-regular'>Are you sure you want to sell this stock?</div>
+                                            <div className='flex gap-4 py-3 justify-around mt-4'>
+                                                <button 
+                                                    className='bg-[#FF0000] py-2 w-[100px] rounded-lg text-[#f3f3f3] hover:bg-opacity-80 flex justify-center gap-3 items-center roboto-regular'
+                                                    onClick={()=>{sellStock()}}
+                                                >
+                                                    <div>Yes</div>
+                                                </button>
+                                                <button 
+                                                    className='bg-[#FF0000] py-2 w-[100px] rounded-lg text-[#f3f3f3] hover:bg-opacity-80 flex gap-3 items-center roboto-regular justify-center'
+                                                    onClick={()=>{setIsSell(false)}}
+                                                >
+                                                    <div>No</div>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>}
                         </div>
                     )
                 })

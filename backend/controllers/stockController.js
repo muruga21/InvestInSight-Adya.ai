@@ -74,6 +74,41 @@ const buyStock = async(req, res) => {
     }
 }
 
-const getStocks
+const getUserStocks = async(req, res) =>{
+    try{
+        const stocks = await stockBoughtModel.find({userName: req.user});
+        if(stocks){
+            return res.status(200).json({error:false, message: stocks})
+        }
+    }
+    catch(err){
+        console.log(err.message)
+        return res.status(500).json({error:true, message: err.message})
+    }
+}
 
-module.exports = { addStock, getTopStocks, getStocks, buyStock }
+const sellStocks = async (req, res) => {
+    const { stockId } = req.body;
+    const userName = req.user;
+
+    if (!stockId || !userName ) {
+        return res.status(400).json({ error:false, message: 'Please enter all fields' });
+    }
+    try{
+        const isStocks = await stockBoughtModel.findOne({ stockId: stockId, userName: userName });
+        if (!isStocks) {
+            return res.status(400).json({ error:false, message: 'Stock does not exists' });
+        }
+        const doc = await stockBoughtModel.deleteOne({ stockId: stockId, userName: userName });
+        if (doc) {
+            return res.status(200).json({ error: false, message: 'Stock sold successfully' });
+        }
+    }
+    catch(err){
+        console.log(err.message)
+        return res.status(500).json({error:true, message: err.message})
+    }
+
+}
+
+module.exports = { addStock, getTopStocks, getStocks, buyStock, getUserStocks, sellStocks}
