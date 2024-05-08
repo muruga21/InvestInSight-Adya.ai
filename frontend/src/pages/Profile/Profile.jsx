@@ -132,6 +132,15 @@ const Profile = () => {
                     )
                 })
             }
+            {
+                (stocks.length === 0) && (
+                    <div>
+                        <div className='text-4xl roboto-regular text-center h-[200px] flex items-center justify-center text-[#33333361]'>
+                            <div>No stocks bought yet</div>
+                        </div>
+                    </div>
+                )
+            }
         </div>
     </div>  
   )
