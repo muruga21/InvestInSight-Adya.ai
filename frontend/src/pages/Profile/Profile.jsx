@@ -1,5 +1,6 @@
 import React ,{useEffect, useState} from 'react'
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const Profile = () => {
 
@@ -7,6 +8,7 @@ const Profile = () => {
     const [isSell, setIsSell] = useState(false);
     const [stockId, setStockId] = useState('');
     const [userName, setUserName] = useState('');
+    const navigate = useNavigate();
 
   const getUser = async() => {
     try{
@@ -27,6 +29,11 @@ const Profile = () => {
     catch(err){
       console.log(err.message)
     }
+  }
+
+  const logout = () =>{
+    document.cookie = `token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`
+    navigate('/login');
   }
 
   useEffect(()=>{
@@ -90,7 +97,7 @@ const Profile = () => {
 
   return (
     <div className='m-4 flex items-center flex-col min-h-[80vh]'>
-        <div className='md:w-[80%] w-full border border-[#c0c0c0] p-8 rounded-lg bg-[#eafcfc]'>
+        <div className='md:w-[80%] w-full flex justify-between items-center border border-[#c0c0c0] p-8 rounded-lg bg-[#eafcfc]'>
             <div className='flex items-center gap-10'>
                 <img 
                     src='https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small_2x/default-avatar-icon-of-social-media-user-vector.jpg'
@@ -101,6 +108,7 @@ const Profile = () => {
                     {userName}
                 </div>
             </div>
+            <button className='bg-[#FF0000] py-2 px-4 rounded-lg text-[#f3f3f3] hover:bg-opacity-80 flex gap-3 items-center roboto-regular text-xl' onClick={()=>logout()}>logout</button>
         </div>
         <div className='md:w-[80%] w-full'>
             <div className="grid grid-cols-5 gap-2 border-b border-[#c0c0c0] w-full text-xl items-center">

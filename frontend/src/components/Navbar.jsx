@@ -1,11 +1,9 @@
 import React, {useState} from 'react'
-// import { FaFile } from "react-icons/fa";
 import CloseIcon from '@mui/icons-material/Close';
 import {Link,useNavigate} from 'react-router-dom'
 import DehazeIcon from '@mui/icons-material/Dehaze';
 import { SiWebmoney } from "react-icons/si";
 import './components.css'
-
 
 const Navbar = (props) => {
   const navigate = useNavigate()
