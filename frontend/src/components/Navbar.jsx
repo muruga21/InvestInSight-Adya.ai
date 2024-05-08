@@ -32,7 +32,7 @@ const Navbar = (props) => {
                             <div className='p-4 md:p-0 shadow-sm md:shadow-none'>Stocks</div>
                         </Link>
                         <Link to='/profile' className='nav-items'>
-                            <div className='p-4 md:p-0 shadow-sm md:shadow-none'>profile</div>
+                            <div className='p-4 md:p-0 shadow-sm md:shadow-none'>Profile</div>
                         </Link> 
                     </div>
                 </div>
