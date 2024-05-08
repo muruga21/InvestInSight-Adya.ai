@@ -9,4 +9,7 @@
     .nav-items{
         @apply border-b-2 border-[#f3f3f3] border-opacity-0 hover:border-[#470ff4] ease-in-out duration-500
     }
+    .button-imp{
+        @apply py-3 px-8 bg-primary hover:bg-opacity-80 text-[#f3f3f3] rounded-lg text-xl
+    }
 }

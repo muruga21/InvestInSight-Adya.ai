@@ -7,6 +7,9 @@ import Login from './pages/Login/Login.jsx';
 import Signup from './pages/Signup/Signup.jsx';
 import Home from './pages/Home/Home.jsx';
 import BrowseStocks from './pages/Stocks/BrowseStocks.jsx';
+import store from './redux/store.js'
+import { Provider } from 'react-redux'
+import Payment from './pages/Payment/Payment.jsx';
 
 const router = createBrowserRouter([
   {
@@ -20,6 +23,10 @@ const router = createBrowserRouter([
       {
         path:"/stocks",
         element:<BrowseStocks/>
+      },
+      {
+        path:"/payment",
+        element:<Payment/>
       }
     ]
   },
@@ -34,7 +41,7 @@ const router = createBrowserRouter([
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
+  <Provider store={store}>
     <RouterProvider router={router} />
-  </React.StrictMode>,
+  </Provider>,
 )

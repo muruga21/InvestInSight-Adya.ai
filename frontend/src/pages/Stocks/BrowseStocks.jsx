@@ -35,7 +35,6 @@ const BrowseStocks = () => {
     }
 
     const handleView = (stock) => {
-        console.log(stock)
         setIsPopupOpen(true);
         setStockId(stockId);
         setStockDetails(stock);
