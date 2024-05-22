@@ -10,9 +10,29 @@ const Payment = () => {
     console.log({ stockName, stockCount, stockPrice, stockId, stockImg})
     const navigate = useNavigate();
 
+    function getCookieValue(name) {
+        // Split document.cookie string into individual cookies
+        const cookies = document.cookie.split(';');
+        
+        // Iterate over each cookie
+        for (let cookie of cookies) {
+            // Trim any leading whitespace
+            cookie = cookie.trim();
+            
+            // Check if the cookie starts with the name we're looking for
+            if (cookie.startsWith(name + '=')) {
+                // Return the value part after the '='
+                return cookie.substring(name.length + 1);
+            }
+        }
+        
+        // Return null if the cookie was not found
+        return null;
+    }
+
     const handlePurchase = async () => {
         try{
-            const token = document.cookie.split('=')[1]
+            const token = getCookieValue('token');
             const response = await axios.post(process.env.REACT_APP_BACKEND_URL+'/stock/buyStock',
             {
                 stockId,

@@ -12,7 +12,7 @@ const Profile = () => {
 
   const getUser = async() => {
     try{
-      const token = document.cookie.split('=')[1];
+      const token = getCookieValue('token');
       const response = await axios.get(process.env.REACT_APP_BACKEND_URL+'/user/getUser', {
         headers: {
           'Content-Type': 'application/json',
@@ -39,10 +39,29 @@ const Profile = () => {
   useEffect(()=>{
     getUser();
   },[])
+  function getCookieValue(name) {
+    // Split document.cookie string into individual cookies
+    const cookies = document.cookie.split(';');
+    
+    // Iterate over each cookie
+    for (let cookie of cookies) {
+        // Trim any leading whitespace
+        cookie = cookie.trim();
+        
+        // Check if the cookie starts with the name we're looking for
+        if (cookie.startsWith(name + '=')) {
+            // Return the value part after the '='
+            return cookie.substring(name.length + 1);
+        }
+    }
+    
+    // Return null if the cookie was not found
+    return null;
+}
     
     const fetchStocks = async () => {
         try{
-            const token = document.cookie.split('=')[1];
+            const token = getCookieValue('token');
             const response = await axios.get(process.env.REACT_APP_BACKEND_URL+'/stock/getUserStocks', {
                 headers: {
                     'Content-Type': 'application/json',
@@ -63,7 +82,7 @@ const Profile = () => {
 
     const sellStock = async () => {
         try{
-            const token = document.cookie.split('=')[1];
+            const token = getCookieValue('token');
             const response = await axios.post(process.env.REACT_APP_BACKEND_URL+'/stock/sellStocks', {
                 stockId: stockId
             }, {
@@ -120,7 +139,7 @@ const Profile = () => {
             {
                 stocks.map((stock, index)=>{
                     return(
-                        <div className="grid grid-cols-5 gap-2 border-b border-[#c0c0c0] w-full text-xl items-center">
+                        <div className="grid grid-cols-5 gap-2 border-b border-[#c0c0c0] w-full text-xl items-center hover:bg-[#f4f5f6]">
                             <div className='flex items-center justify-center'>
                                 <img 
                                     src={stock.imgUrl} 

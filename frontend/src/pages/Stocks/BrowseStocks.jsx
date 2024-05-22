@@ -76,7 +76,7 @@ const BrowseStocks = () => {
             {
                 filteredStocks.map((stock, index)=>{
                     return(
-                        <div className="stock-row">
+                        <div className="stock-row hover:bg-[#f4f5f6]">
                             <div className='flex items-center justify-center'>
                                 <img 
                                     src={stock.imgUrl} 
