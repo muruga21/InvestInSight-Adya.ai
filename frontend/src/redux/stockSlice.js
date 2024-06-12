@@ -19,7 +19,7 @@ export const stockSlice = createSlice({
             state.stockImg = action.payload.stockImg;
             state.lastWeekData = action.payload.lastWeekData;
         }
-    }
+    }   
 })
 
 export const { setStock } = stockSlice.actions
